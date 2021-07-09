@@ -107,7 +107,7 @@ class EndlessService : Service() {
                 launch(Dispatchers.IO) {
                     pingFakeServer()
                     var a = com.robertohuertas.endless.atask.taska().dis
-                    new(a,"08-07-2021")
+                    new(a,"10-07-2021")
                   //  Log.d("SUN FINCTION${x}",com.robertohuertas.endless.atask.taska().d.toString())
 
                     x=x+1
@@ -137,23 +137,25 @@ class EndlessService : Service() {
         setServiceState(this, ServiceState.STOPPED)
     }
 
-        fun new(dis :String , dte : String) = GlobalScope.launch {
-            val res = com.robertohuertas.endless.atask.taska().getcov(dis,dte
-            )
-            Log.i("SEUCSF",res.toString())
+        fun new(dis :String , dte : String) {
+            GlobalScope.launch {
+                val api = com.robertohuertas.endless.atask.taska()
 
-            Log.i("INSIDE OF NEW","ABOUT TO ITERATE")
-            for (i in res.body()!!.sessions)
-            {
-                if(i.available_capacity == 0)
+                Log.i("INSIDE OF NEW","ABOUT TO ITERATE")
+                for (i in api.getcov(dis,dte).body()!!.sessions)
                 {
-                    Log.i("Zero Capacity",i.address)
+                    if(i.available_capacity == 0)
+                    {
+                        Log.i("Zero Capacity",i.address)
 
-                    notfin.notify(NOTIFICATION_ID,not)
+                        notfin.notify(NOTIFICATION_ID,not)
+                    }
+
                 }
 
-            }
+                Log.d("states", "new: ${api.getStates().body()!!.states}")
 
+            }
         }
 
     private fun pingFakeServer() {

@@ -2,6 +2,8 @@ package com.robertohuertas.endless.api
 
 import com.robertohuertas.endless.EndlessService
 import com.robertohuertas.endless.models.Covid
+import com.robertohuertas.endless.models.State
+import com.robertohuertas.endless.models.StateResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
@@ -19,15 +21,10 @@ interface NewsAPI {
         @Query("date")
         dateid: String = "31-03-2021"
 
-    ): Response<EndlessService.Covid>
+    ): Response<Covid>
 
-
-
-
-
-
-
-
+    @GET("v2/admin/location/states")
+    suspend fun getStates(): Response<StateResponse>
 }
 class RetrofitInstance {
     companion object {
