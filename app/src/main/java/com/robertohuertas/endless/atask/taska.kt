@@ -8,5 +8,7 @@ class taska() {
 
     suspend fun getStates() = RetrofitInstance.api.getStates()
 
+    suspend fun getDistricts()= RetrofitInstance.api.getDistricts()
+
     var dis = "512"
 }

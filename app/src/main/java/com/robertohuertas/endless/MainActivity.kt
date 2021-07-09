@@ -6,7 +6,9 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.robertohuertas.endless.viewmodel.MyViewmodel
 
 class MainActivity : AppCompatActivity() {
 
