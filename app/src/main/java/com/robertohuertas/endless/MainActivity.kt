@@ -15,8 +15,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_first)
-
         title = "Endless Service"
+
 
 //        findViewById<Button>(R.id.btnStartService).let {
 //            it.setOnClickListener {
