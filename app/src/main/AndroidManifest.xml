@@ -27,6 +27,7 @@
             </intent-filter>
         </activity>
 
+
         <receiver android:enabled="true" android:name=".StartReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
