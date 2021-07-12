@@ -14,24 +14,23 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_first)
+        setContentView(R.layout.activity_main)
         title = "Endless Service"
 
 
-//        findViewById<Button>(R.id.btnStartService).let {
-//            it.setOnClickListener {
-//                log("START THE FOREGROUND SERVICE ON DEMAND")
-//                actionOnService(Actions.START)
-//            }
-//        }
-//
-//        findViewById<Button>(R.id.btnStopService).let {
-//            it.setOnClickListener {
-//                log("STOP THE FOREGROUND SERVICE ON DEMAND")
-//                actionOnService(Actions.STOP)
-//            }
-//        }
+        findViewById<Button>(R.id.btnStartService).let {
+            it.setOnClickListener {
+                log("START THE FOREGROUND SERVICE ON DEMAND")
+                actionOnService(Actions.START)
+            }
+        }
 
+        findViewById<Button>(R.id.btnStopService).let {
+            it.setOnClickListener {
+                log("STOP THE FOREGROUND SERVICE ON DEMAND")
+                actionOnService(Actions.STOP)
+            }
+        }
     }
 
     fun actionOnService(action: Actions) {
