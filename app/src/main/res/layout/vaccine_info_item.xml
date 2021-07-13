@@ -38,11 +38,13 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/date"
                     android:text="11-07-2021"
                     android:textStyle="bold"/>
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/age_group"
                         android:text="Age Group: 18"
                         android:textStyle="bold"/>
                 <LinearLayout
@@ -53,16 +55,19 @@
                             android:paddingHorizontal="6dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/vaccine_name"
                             android:text="Vaccine Nmae"/>
                     <TextView
                             android:paddingHorizontal="6dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/type_ofFees"
                             android:text="Paid"/>
                     <TextView
                             android:paddingHorizontal="6dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/fees"
                             android:text="Rs 700"/>
                 </LinearLayout>
 
@@ -86,11 +91,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Dose 1(140)"
+                            android:id="@+id/first_Slot"
                             android:textStyle="bold"/>
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20dp"
+                        android:id="@+id/book_Now"
                         android:text="@string/book_covin"
                         android:textStyle=""/>
             </LinearLayout>
