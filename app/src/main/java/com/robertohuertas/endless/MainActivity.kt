@@ -50,5 +50,5 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-   var  dis = "512"
+  // var  dis = "512"
 }

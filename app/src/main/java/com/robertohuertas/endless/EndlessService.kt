@@ -103,7 +103,7 @@ class EndlessService : Service() {
                     x=x+1
                     log(x.toString())
                 }
-                delay(1 * 10 * 1000)
+                delay(1 * 1200 * 1000)
             }
             log("End of the loop for the service")
         }
@@ -134,17 +134,14 @@ class EndlessService : Service() {
                 Log.i("INSIDE OF NEW","ABOUT TO ITERATE")
                 for (i in api.getcov(dis,dte).body()!!.sessions)
                 {
-                    if(i.available_capacity == 0)
-                    {
-                        Log.i("Zero Capacity",i.address)
-                        if(i.min_age_limit > 18){
 
-                        }
+                        Log.i("Zero Capacity",i.address)
+
                         notfin.notify(NOTIFICATION_ID,not)
-                    }
+
                 }
                 Log.d("states", "new: ${api.getStates().body()!!.states}")
-                Log.d("states", "new: ${api.getDistricts().body()!!.districts}")
+                Log.d("district", "new: ${api.getDistricts().body()!!.districts}")
             }
         }
 

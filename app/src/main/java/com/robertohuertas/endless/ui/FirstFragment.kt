@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.robertohuertas.endless.*
@@ -39,7 +40,7 @@ class FirstFragment:Fragment() {
             activity.actionOnService(Actions.START)
         }
         binding.checkAvailability.setOnClickListener {
-            model.getCovid()
+            model.getCov()
             findNavController().navigate(R.id.action_firstFragment_to_secondFragment)
         }
     }
