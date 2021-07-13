@@ -8,10 +8,13 @@ import android.util.Log
 import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.robertohuertas.endless.databinding.ActivityMainBinding
 import com.robertohuertas.endless.viewmodel.MyViewmodel
+import java.util.zip.Inflater
 
 class MainActivity : AppCompatActivity() {
 
+    val binding : ActivityMainBinding ? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
