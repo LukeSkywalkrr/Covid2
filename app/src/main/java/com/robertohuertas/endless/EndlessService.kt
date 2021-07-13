@@ -14,12 +14,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import java.text.SimpleDateFormat
-import java.util.*
-import com.github.kittinunf.fuel.Fuel
-import com.github.kittinunf.fuel.core.extensions.jsonBody
+import com.robertohuertas.endless.repository.NewsRepo
 import kotlinx.coroutines.*
-import com.robertohuertas.endless.atask.taska as taska1
 
 
 class EndlessService : Service() {
@@ -101,9 +97,7 @@ class EndlessService : Service() {
         GlobalScope.launch(Dispatchers.IO) {
             while (isServiceStarted) {
                 launch(Dispatchers.IO) {
-                    pingFakeServer()
-                    var a = com.robertohuertas.endless.atask.taska().dis
-                    new(a,"10-07-2021")
+                    new("512","10-07-2021")
                   //  Log.d("SUN FINCTION${x}",com.robertohuertas.endless.atask.taska().d.toString())
 
                     x=x+1
@@ -135,7 +129,7 @@ class EndlessService : Service() {
 
         fun new(dis :String , dte : String) {
             GlobalScope.launch {
-                val api = com.robertohuertas.endless.atask.taska()
+                val api = NewsRepo()
 
                 Log.i("INSIDE OF NEW","ABOUT TO ITERATE")
                 for (i in api.getcov(dis,dte).body()!!.sessions)
@@ -153,35 +147,6 @@ class EndlessService : Service() {
                 Log.d("states", "new: ${api.getDistricts().body()!!.districts}")
             }
         }
-
-    private fun pingFakeServer() {
-        val df = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.mmmZ")
-        val gmtTime = df.format(Date())
-
-        val deviceId = Settings.Secure.getString(applicationContext.contentResolver, Settings.Secure.ANDROID_ID)
-
-        val json =
-            """
-                {
-                    "deviceId": "$deviceId",
-                    "createdAt": "$gmtTime"
-                }
-            """
-        try {
-            Fuel.post("https://jsonplaceholder.typicode.com/posts")
-                .jsonBody(json)
-                .response { _, _, result ->
-                    val (bytes, error) = result
-                    if (bytes != null) {
-                        log("[response FOXes] ${String(bytes)}")
-                    } else {
-                        log("[response FOXor] ${error?.message}")
-                    }
-                }
-        } catch (e: Exception) {
-            log("Error making the request: ${e.message}")
-        }
-    }
 
     private fun ourNotification()  {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
