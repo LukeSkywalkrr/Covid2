@@ -98,6 +98,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="20dp"
                         android:id="@+id/book_Now"
+                        android:textColor="@color/design_default_color_primary_dark"
                         android:text="@string/book_covin"
                         android:textStyle=""/>
             </LinearLayout>
