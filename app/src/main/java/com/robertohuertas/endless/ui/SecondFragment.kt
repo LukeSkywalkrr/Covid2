@@ -8,15 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.robertohuertas.endless.adaptor.RecyclerViewAdaptor
-import com.robertohuertas.endless.databinding.ActivityFirstBinding
 import com.robertohuertas.endless.databinding.ActivitySecondBinding
 import com.robertohuertas.endless.viewmodel.MyViewmodel
 
 class SecondFragment: Fragment() {
     var  adapter:RecyclerViewAdaptor? = null
-    private val model: MyViewmodel by activityViewModels()
+    private val myViewModel: MyViewmodel by activityViewModels()
     lateinit var binding: ActivitySecondBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,11 +31,11 @@ class SecondFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        model.distric.observe(viewLifecycleOwner, Observer {
+        myViewModel.distric.observe(viewLifecycleOwner, Observer {
             Log.d("newDistrict", "onViewCreated: $it")
         })
 
-        model.covidListFromFirstFragment.observe(viewLifecycleOwner, Observer {
+        myViewModel.covidFinalListForRV.observe(viewLifecycleOwner, Observer {
             Log.d("XXX", "onViewCreated: $it")
             if(!it.isNullOrEmpty())
             {
@@ -51,7 +49,24 @@ class SecondFragment: Fragment() {
 
 
         binding.button1.setOnClickListener {
-            model.revUpdate()
+            myViewModel.buttonClicked(1)
+            myViewModel.buttonUnselected(2)
+            myViewModel.checkForFiltersToBeAddedToList()
+        }
+        binding.button2.setOnClickListener {
+            myViewModel.buttonClicked(2)
+            myViewModel.buttonUnselected(1)
+            myViewModel.checkForFiltersToBeAddedToList()
+        }
+        binding.button3.setOnClickListener {
+            myViewModel.buttonClicked(3)
+            myViewModel.buttonUnselected(4)
+            myViewModel.checkForFiltersToBeAddedToList()
+        }
+        binding.button4.setOnClickListener {
+            myViewModel.buttonClicked(4)
+            myViewModel.buttonUnselected(3)
+            myViewModel.checkForFiltersToBeAddedToList()
         }
 
 

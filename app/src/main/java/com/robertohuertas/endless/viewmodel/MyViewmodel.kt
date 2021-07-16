@@ -72,16 +72,21 @@ class MyViewmodel : ViewModel() {
         button.let { listOfButtons[it] = 0 }
     }
 
-//    fun checkForFiltersToBeAddedToList(){
-//        covidListToBeModified = covidListFromFirstFragment
-//        covidFinalListForRV = covidListToBeModified.let { finalList->
-//            for (button in listOfButtons){
-//                when(button){
-//                    1->
-//                }
-//            }
-//        }
-//    }
+    fun checkForFiltersToBeAddedToList(){
+        covidListToBeModified = covidListFromFirstFragment
+        val temporaryList = covidListToBeModified.value?.toMutableList()
+        covidListToBeModified.let { finalList->
+            for (i in 1..9){
+                when(i){
+                    1-> if(listOfButtons[i] == 1){temporaryList?.retainAll{it.fee_type == "Free"}}
+                    2-> if(listOfButtons[i] == 1){temporaryList?.retainAll{it.fee_type == "Paid"}}
+                    3-> if(listOfButtons[i] == 1){temporaryList?.retainAll{it.fee_type == "COVISHIELD"}}
+                    4-> if(listOfButtons[i] == 1){temporaryList?.retainAll{it.fee_type == "COVAXIN"}}
+                }
+            }
+        }
+        covidFinalListForRV.value = temporaryList
+    }
 
 
 
