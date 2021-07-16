@@ -1,14 +1,11 @@
 package com.robertohuertas.endless.viewmodel
 
-import android.content.Intent
-import android.os.Build
 import android.util.Log
-import androidx.core.content.ContextCompat.startForegroundService
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.robertohuertas.endless.*
-import com.robertohuertas.endless.api.RetrofitInstance
 import com.robertohuertas.endless.models.Covid
 import com.robertohuertas.endless.models.District
 import com.robertohuertas.endless.models.Session
@@ -20,7 +17,15 @@ class MyViewmodel : ViewModel() {
 
     val distric = MutableLiveData<List<District>>()
     val covid = MutableLiveData<Covid>()
-    val covidList = MutableLiveData<List<Session>>()
+    val covidListFromFirstFragment = MutableLiveData<List<Session>>()
+    val listOfButtons = mutableListOf(0,0,0,0,0,0,0,0,0)
+    var covidFinalListForRV = MutableLiveData<List<Session>>()
+
+    var covidListToBeModified = MutableLiveData<List<Session>>()
+
+    init {
+        covidListToBeModified = covidListFromFirstFragment
+    }
 
 
     fun getDistrict() {
@@ -28,29 +33,37 @@ class MyViewmodel : ViewModel() {
             distric.value = repository.getDistricts().body()?.districts!!
         }
     }
-    fun revUpdate()
-    {
-        covidList.value = covid.value?.sessions?.filterNot { it.available_capacity == 1 }
-
-
+    fun revUpdate() {
+        covidListFromFirstFragment.value = covid.value?.sessions?.filterNot { it.available_capacity == 1 }
     }
 
-      fun getCov()
-      {
+      fun getCov() {
           viewModelScope.launch {
               covid.value=repository.getcov("512","17-07-2021").body()
-              covidList.value = covid.value?.sessions
+              covidListFromFirstFragment.value = covid.value?.sessions
               Log.i("GetCOV",covid.value.toString())
-
-
-              covidList.value = covidList.value?.filter { it.available_capacity == 1 }
+              covidListFromFirstFragment.value = covidListFromFirstFragment.value?.filter { it.available_capacity == 1 }
           }
       }
 
+    fun buttonClicked(button:Int){
+        button.let { listOfButtons[it] = 1 }
+    }
 
+    fun buttonUnselected(button:Int){
+        button.let { listOfButtons[it] = 0 }
+    }
 
-
-
+    fun checkForFiltersToBeAddedToList(){
+        covidListToBeModified = covidListFromFirstFragment
+        covidFinalListForRV = covidListToBeModified.let { finalList->
+            for (button in listOfButtons){
+                when(button){
+                    1->
+                }
+            }
+        }
+    }
 
 
 
