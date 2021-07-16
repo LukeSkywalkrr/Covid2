@@ -37,7 +37,7 @@ class SecondFragment: Fragment() {
             Log.d("newDistrict", "onViewCreated: $it")
         })
 
-        model.covid.observe(viewLifecycleOwner, Observer {
+        model.covidList.observe(viewLifecycleOwner, Observer {
             Log.d("XXX", "onViewCreated: $it")
             adapter = RecyclerViewAdaptor(it)
             binding.recyclerView.adapter = adapter
@@ -46,7 +46,9 @@ class SecondFragment: Fragment() {
      //   binding.recyclerView.layoutManager = LinearLayoutManager(this
 
 
-
+        binding.button1.setOnClickListener {
+            model.revUpdate()
+        }
 
 
     }

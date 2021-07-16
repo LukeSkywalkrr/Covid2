@@ -11,7 +11,7 @@ import com.robertohuertas.endless.databinding.VaccineInfoItemBinding
 import com.robertohuertas.endless.models.Covid
 import com.robertohuertas.endless.models.Session
 
-class RecyclerViewAdaptor(val covid: Covid) : RecyclerView.Adapter<RecyclerViewAdaptor.SheduleViewHolder>(){
+class RecyclerViewAdaptor(val covid: List<Session>) : RecyclerView.Adapter<RecyclerViewAdaptor.SheduleViewHolder>(){
 
     inner class SheduleViewHolder(private val binding: VaccineInfoItemBinding) : RecyclerView.ViewHolder(binding.root)
     {
@@ -48,13 +48,16 @@ class RecyclerViewAdaptor(val covid: Covid) : RecyclerView.Adapter<RecyclerViewA
     }
 
     override fun onBindViewHolder(holder: SheduleViewHolder, position: Int) {
-            val sesIem = covid.sessions[position]
-            holder.bind(sesIem)
+        val  sesIem = covid[position]
+
+                holder.bind(sesIem)
+
+
     }
 
     override fun getItemCount(): Int {
 
-            return covid.sessions.size
+            return covid.size
     }
 
 

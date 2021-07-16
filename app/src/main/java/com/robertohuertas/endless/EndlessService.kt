@@ -140,8 +140,8 @@ class EndlessService : Service() {
                         notfin.notify(NOTIFICATION_ID,not)
 
                 }
-                Log.d("states", "new: ${api.getStates().body()!!.states}")
-                Log.d("district", "new: ${api.getDistricts().body()!!.districts}")
+                Log.i("states", "new: ${api.getStates().body()!!.states}")
+                Log.i("district", "new: ${api.getDistricts().body()!!.districts}")
             }
         }
 

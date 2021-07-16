@@ -34,13 +34,25 @@ class FirstFragment:Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val activity = activity as MainActivity
+        var flag = true
         binding.notify.setOnClickListener {
-            val activity = activity as MainActivity
-            activity.actionOnService(Actions.START)
+
+            if(flag)
+            {
+                activity.actionOnService(Actions.START)
+                flag=false
+            }else
+            {
+                activity.actionOnService(Actions.STOP)
+                flag=true
+            }
+
         }
         binding.checkAvailability.setOnClickListener {
             model.getCov()
+           // activity.actionOnService()
+           // actionOnService(Actions.STOP)
             findNavController().navigate(R.id.action_firstFragment_to_secondFragment)
         }
     }
