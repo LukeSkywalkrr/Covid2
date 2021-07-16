@@ -39,8 +39,12 @@ class SecondFragment: Fragment() {
 
         model.covidListFromFirstFragment.observe(viewLifecycleOwner, Observer {
             Log.d("XXX", "onViewCreated: $it")
-            adapter = RecyclerViewAdaptor(it)
-            binding.recyclerView.adapter = adapter
+            if(!it.isNullOrEmpty())
+            {
+                adapter = RecyclerViewAdaptor(it)
+                binding.recyclerView.adapter = adapter
+            }
+
         })
 
      //   binding.recyclerView.layoutManager = LinearLayoutManager(this

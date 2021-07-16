@@ -23,7 +23,7 @@ class MyViewmodel : ViewModel() {
     var covidFinalListForRV = MutableLiveData<List<Session>>()
 
     var covidListToBeModified = MutableLiveData<List<Session>>()
-    var demopin = ""
+    var demopin = "141001"
     init {
         covidListToBeModified = covidListFromFirstFragment
     }

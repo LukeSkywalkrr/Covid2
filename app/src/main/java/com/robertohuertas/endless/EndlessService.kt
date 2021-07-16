@@ -14,7 +14,9 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.fragment.app.activityViewModels
 import com.robertohuertas.endless.repository.NewsRepo
+import com.robertohuertas.endless.viewmodel.MyViewmodel
 import kotlinx.coroutines.*
 
 
@@ -25,6 +27,8 @@ class EndlessService : Service() {
     val CHANNEL_ID = "channelID"
     val CHANNEL_NAME = "channelname"
     val NOTIFICATION_ID =0
+    var d : String = "221005"
+   // lateinit var  activity : MainActivity
 
     private var wakeLock: PowerManager.WakeLock? = null
     private var isServiceStarted = false
@@ -50,6 +54,7 @@ class EndlessService : Service() {
                 "with a null intent. It has been probably restarted by the system."
             )
         }
+        intent?.getStringExtra("PINCODE").also { d = it.toString() }
         // by returning this we make sure the service is restarted if the system kills the service
         return START_STICKY
     }
@@ -59,6 +64,8 @@ class EndlessService : Service() {
         log("The service has been created".toUpperCase())
         val notification = createNotification()
         startForeground(1, notification)
+        //activity as MainActivity
+
     }
 
     override fun onDestroy() {
@@ -97,7 +104,7 @@ class EndlessService : Service() {
         GlobalScope.launch(Dispatchers.IO) {
             while (isServiceStarted) {
                 launch(Dispatchers.IO) {
-                    new("512","10-07-2021")
+                    new("512","17-07-2021")
                   //  Log.d("SUN FINCTION${x}",com.robertohuertas.endless.atask.taska().d.toString())
 
                     x=x+1
@@ -130,16 +137,20 @@ class EndlessService : Service() {
         fun new(dis :String , dte : String) {
             GlobalScope.launch {
                 val api = NewsRepo()
+                Log.i("D VALUE IS",d)
+              var x=api.getbyPin(d,dte).body()?.sessions
 
-                Log.i("INSIDE OF NEW","ABOUT TO ITERATE")
-                for (i in api.getcov(dis,dte).body()!!.sessions)
-                {
+               Log.i("WORKING FUNCTION",x.toString())
 
-                        Log.i("Zero Capacity",i.address)
 
-                        notfin.notify(NOTIFICATION_ID,not)
-
-                }
+//                for (i in api.getbyPin(dis,dte).body()!!.sessions)
+//                {
+//
+//                        Log.i("Zero Capacity",i.address)
+//
+//                        notfin.notify(NOTIFICATION_ID,not)
+//
+//                }
                 Log.i("states", "new: ${api.getStates().body()!!.states}")
                 Log.i("district", "new: ${api.getDistricts().body()!!.districts}")
             }

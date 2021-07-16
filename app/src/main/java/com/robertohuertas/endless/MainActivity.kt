@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
 import com.robertohuertas.endless.databinding.ActivityMainBinding
 import com.robertohuertas.endless.viewmodel.MyViewmodel
 import java.util.zip.Inflater
@@ -15,6 +16,7 @@ import java.util.zip.Inflater
 class MainActivity : AppCompatActivity() {
 
     val binding : ActivityMainBinding ? = null
+    private val model: MyViewmodel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -34,6 +36,7 @@ class MainActivity : AppCompatActivity() {
 //                actionOnService(Actions.STOP)
 //            }
 //        }
+        //model.isFirstDose
     }
 
     fun actionOnService(action: Actions) {
@@ -49,6 +52,21 @@ class MainActivity : AppCompatActivity() {
             startService(it)
         }
     }
+    fun myactionOnService(action: Actions) {
+        if (getServiceState(this) == ServiceState.STOPPED && action == Actions.STOP) return
+        val intent = Intent(this, EndlessService::class.java)
+        intent.putExtra("PINCODE",model.demopin)
 
+        intent.also {
+            it.action = action.name
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                log("Starting the service in >=26 Mode")
+                startForegroundService(it)
+                return
+            }
+            log("Starting the service in < 26 Mode")
+            startService(it)
+        }
+    }
   // var  dis = "512"
 }

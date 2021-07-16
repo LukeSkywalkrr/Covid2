@@ -40,7 +40,7 @@ class FirstFragment:Fragment() {
 
             if(flag)
             {
-                activity.actionOnService(Actions.START)
+                activity.myactionOnService(Actions.START)
                 flag=false
             }else
             {
