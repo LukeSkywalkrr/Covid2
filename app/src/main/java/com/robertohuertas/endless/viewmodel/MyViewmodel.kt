@@ -14,7 +14,8 @@ import kotlinx.coroutines.launch
 
 class MyViewmodel : ViewModel() {
     val repository = NewsRepo()
-
+    var iseighteen = true
+    var isFirstDose = true
     val distric = MutableLiveData<List<District>>()
     val covid = MutableLiveData<Covid>()
     val covidListFromFirstFragment = MutableLiveData<List<Session>>()
@@ -22,7 +23,7 @@ class MyViewmodel : ViewModel() {
     var covidFinalListForRV = MutableLiveData<List<Session>>()
 
     var covidListToBeModified = MutableLiveData<List<Session>>()
-
+    var demopin = ""
     init {
         covidListToBeModified = covidListFromFirstFragment
     }
@@ -37,12 +38,29 @@ class MyViewmodel : ViewModel() {
         covidListFromFirstFragment.value = covid.value?.sessions?.filterNot { it.available_capacity == 1 }
     }
 
-      fun getCov() {
+      fun getCov(pin : String) {
           viewModelScope.launch {
-              covid.value=repository.getcov("512","17-07-2021").body()
+              covid.value=repository.getbyPin(pin,"17-07-2021").body()
               covidListFromFirstFragment.value = covid.value?.sessions
               Log.i("GetCOV",covid.value.toString())
-              covidListFromFirstFragment.value = covidListFromFirstFragment.value?.filter { it.available_capacity == 1 }
+             // covidListFromFirstFragment.value = covidListFromFirstFragment.value?.filter { it.available_capacity == 1 }
+              //LOGIC TO FILTER
+              if(iseighteen)
+              {
+                  covidListFromFirstFragment.value = covidListFromFirstFragment.value?.filter { it.min_age_limit == 18 }
+              }else
+              {
+                  covidListFromFirstFragment.value = covidListFromFirstFragment.value?.filter { it.min_age_limit ==45   }
+              }
+              if(isFirstDose)
+              {
+                  covidListFromFirstFragment.value = covidListFromFirstFragment.value?.filter { it.available_capacity_dose1 > 0   }
+              }else
+              {
+                  covidListFromFirstFragment.value = covidListFromFirstFragment.value?.filter { it.available_capacity_dose2 > 0   }
+              }
+
+
           }
       }
 
@@ -54,16 +72,17 @@ class MyViewmodel : ViewModel() {
         button.let { listOfButtons[it] = 0 }
     }
 
-    fun checkForFiltersToBeAddedToList(){
-        covidListToBeModified = covidListFromFirstFragment
-        covidFinalListForRV = covidListToBeModified.let { finalList->
-            for (button in listOfButtons){
-                when(button){
-                    1->
-                }
-            }
-        }
-    }
+//    fun checkForFiltersToBeAddedToList(){
+//        covidListToBeModified = covidListFromFirstFragment
+//        covidFinalListForRV = covidListToBeModified.let { finalList->
+//            for (button in listOfButtons){
+//                when(button){
+//                    1->
+//                }
+//            }
+//        }
+//    }
+
 
 
 

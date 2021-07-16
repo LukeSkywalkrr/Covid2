@@ -26,9 +26,7 @@ class RecyclerViewAdaptor(val covid: List<Session>) : RecyclerView.Adapter<Recyc
                 binding.typeOfFees.text=session?.fee_type
                 binding.date.text=session?.date
                 binding.numberOfSlots.text = session?.available_capacity.toString()
-
                 binding.firstSlot.text=session?.available_capacity_dose1.toString()
-
 
         }
     }
@@ -40,19 +38,12 @@ class RecyclerViewAdaptor(val covid: List<Session>) : RecyclerView.Adapter<Recyc
         LayoutInflater.from(parent.context)
             .inflate(R.layout.vaccine_info_item, parent, false)
         val binding = VaccineInfoItemBinding.bind(view)
-
-
         return SheduleViewHolder(binding)
-
-
     }
 
     override fun onBindViewHolder(holder: SheduleViewHolder, position: Int) {
         val  sesIem = covid[position]
-
                 holder.bind(sesIem)
-
-
     }
 
     override fun getItemCount(): Int {

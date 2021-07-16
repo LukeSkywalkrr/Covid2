@@ -16,7 +16,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface NewsAPI {
-
+    //CALL BY DISTRICT ID
     @GET("v2/appointment/sessions/public/findByDistrict")
    suspend fun getcov(
         @Query("district_id")
@@ -25,6 +25,20 @@ interface NewsAPI {
         dateid: String = "31-03-2021"
 
     ): Response<Covid>
+
+   //CALL BY PIN_CODE
+   @GET("v2/appointment/sessions/public/findByPin")
+   suspend fun getbyPIN(
+       @Query("pincode")
+       pincode: String = "221001",
+       @Query("date")
+       dateid: String = "17-07-2021"
+
+   ): Response<Covid>
+
+
+
+
 
    @Headers(
        "accept: application/json",

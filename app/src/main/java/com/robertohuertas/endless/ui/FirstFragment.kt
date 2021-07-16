@@ -49,11 +49,36 @@ class FirstFragment:Fragment() {
             }
 
         }
+
         binding.checkAvailability.setOnClickListener {
-            model.getCov()
+            model.getCov(binding.pinTextField.text.toString())
            // activity.actionOnService()
            // actionOnService(Actions.STOP)
             findNavController().navigate(R.id.action_firstFragment_to_secondFragment)
+        }
+
+
+
+        // RADIO BUTTON CLICK FUNCTIONALITY
+        binding.radioEighteen.setOnClickListener {
+            binding.radioFortify.isChecked = false
+            model.iseighteen=true
+        }
+
+        binding.radioFortify.setOnClickListener {
+            binding.radioEighteen.isChecked = false
+            model.iseighteen =false
+        }
+
+        binding.radioSecond.setOnClickListener {
+            binding.radioFirst.isChecked = false
+            model.isFirstDose = false
+        }
+
+        binding.radioFirst.setOnClickListener {
+               Log.i("Eighteen ","Effkjsnf")
+            binding.radioSecond.isChecked = false
+            model.isFirstDose=true
         }
     }
 }

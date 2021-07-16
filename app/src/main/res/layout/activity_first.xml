@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -35,7 +36,10 @@
             android:id="@+id/pincode_layout"
             android:visibility="visible"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="0dp">
+
         <LinearLayout
                 android:padding="12dp"
                 android:layout_width="wrap_content"
@@ -59,7 +63,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/pin_textField"
-                    android:hint="Find vaccines by pincode" />
+                    android:hint="Find vaccines by pincode"
+                    android:inputType="number"
+                    android:maxLength="6"/>
 
 
         </LinearLayout>
@@ -95,12 +101,16 @@
                             android:layout_weight="1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content">
+
                         <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="18+"
-                                android:textSize="20sp"/>
+                                android:textSize="20sp" />
+
                         <RadioButton
+                                android:id="@+id/radioEighteen"
+                                android:checked="true"
                                 android:layout_gravity="start"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
@@ -111,12 +121,15 @@
                             android:layout_weight="1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content">
+
                         <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="45+"
-                                android:textSize="20sp"/>
+                                android:textSize="20sp" />
+
                         <RadioButton
+                                android:id="@+id/radioFortify"
                                 android:layout_gravity="start"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
@@ -166,6 +179,8 @@
                                 android:textSize="20sp" />
 
                         <RadioButton
+                                android:id="@+id/radioFirst"
+                                android:checked="true"
                                 android:layout_gravity="start"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
@@ -184,6 +199,7 @@
                                 android:textSize="20sp" />
 
                         <RadioButton
+                                android:id="@+id/radioSecond"
                                 android:layout_gravity="start"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
