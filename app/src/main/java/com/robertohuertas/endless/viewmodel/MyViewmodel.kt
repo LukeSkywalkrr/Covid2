@@ -17,8 +17,8 @@ class MyViewmodel : ViewModel() {
     var iseighteen = true
     var isFirstDose = true
     val distric = MutableLiveData<List<District>>()
-    val covid = MutableLiveData<Covid>()
-    val covidListFromFirstFragment = MutableLiveData<List<Session>>()
+    private val covid = MutableLiveData<Covid>()
+    private val covidListFromFirstFragment = MutableLiveData<List<Session>>()
     var listOfButtons = mutableListOf(0,0,0,0,0,0,0,0,0)
     var covidFinalListForRV = MutableLiveData<List<Session>>()
 

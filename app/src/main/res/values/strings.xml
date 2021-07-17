@@ -3,4 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="book_covin"><u>Book on Cowin</u></string>
+    <string name="dose_1"> Dose 1(%1$d)</string>
+    <string name="dose_2"> Dose 2(%1$d)</string>
+    <string name="slots">%1$d Slots</string>
 </resources>

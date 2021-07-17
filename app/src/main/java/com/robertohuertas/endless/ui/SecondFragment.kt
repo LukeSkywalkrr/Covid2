@@ -35,7 +35,7 @@ class SecondFragment: Fragment() {
 
         myViewModel.covidFinalListForRV.observe(viewLifecycleOwner, Observer {
             Log.d("XXX", "onViewCreated: $it")
-                adapter = RecyclerViewAdaptor(it)
+                adapter = RecyclerViewAdaptor(it, context)
             binding.recyclerView.adapter = adapter
 
         })

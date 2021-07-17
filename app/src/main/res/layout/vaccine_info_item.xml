@@ -6,11 +6,14 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
+            android:padding="8dp"
+            android:background="@drawable/vaccine_info_item_background"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center">
         <TextView
                 android:id="@+id/hospital_name"
                 android:layout_width="match_parent"
@@ -24,6 +27,11 @@
                 android:layout_height="wrap_content"
                 android:text="Hospital Name"
                 android:textSize="14sp"/>
+        <View
+                android:layout_width="match_parent"
+                android:background="#FFFFFF"
+                android:layout_height="2dp"/>
+
 
         <LinearLayout
                 android:orientation="horizontal"
@@ -87,16 +95,31 @@
                             android:text="272 Slots"
                             android:textSize="18sp"
                             android:textStyle="bold"/>
+                <LinearLayout
+                        android:id="@+id/dose_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
                     <TextView
+                            android:textSize="12sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Dose 1(140)"
-                            android:id="@+id/first_Slot"
+                            android:id="@+id/first_dose"
+                            android:textStyle="bold"
+                            android:layout_marginEnd="8dp"/>
+                    <TextView
+                            android:textSize="12sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dose 2(140)"
+                            android:id="@+id/second_dose"
                             android:textStyle="bold"/>
+                </LinearLayout>
+
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         android:id="@+id/book_Now"
                         android:textColor="@color/colorAccent"
                         android:text="@string/book_covin"
