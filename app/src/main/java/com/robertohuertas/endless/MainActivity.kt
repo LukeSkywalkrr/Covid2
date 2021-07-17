@@ -1,28 +1,32 @@
 package com.robertohuertas.endless
 
+import android.R.attr.name
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
-
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.activityViewModels
 import com.robertohuertas.endless.databinding.ActivityMainBinding
 import com.robertohuertas.endless.viewmodel.MyViewmodel
-import java.util.zip.Inflater
+
 
 class MainActivity : AppCompatActivity() {
 
     val binding : ActivityMainBinding ? = null
     private val model: MyViewmodel by viewModels()
+    lateinit var sharedPreferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         title = "Endless Service"
 
+        sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
+       // val myEdit = sharedPreferences.edit()
 
+        //myEdit.putInt("age", age.getText().toString().toInt())
+       // myEdit.commit()
 //        findViewById<Button>(R.id.btnStartService).let {
 //            it.setOnClickListener {
 //                log("START THE FOREGROUND SERVICE ON DEMAND")
@@ -37,6 +41,9 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        }
         //model.isFirstDose
+
+
+
     }
 
     fun actionOnService(action: Actions) {
@@ -54,8 +61,19 @@ class MainActivity : AppCompatActivity() {
     }
     fun myactionOnService(action: Actions) {
         if (getServiceState(this) == ServiceState.STOPPED && action == Actions.STOP) return
+
+        //
+
+        sharedPreferences.edit().putString("s_PIN", model.demopin).apply()
+        sharedPreferences.edit().putBoolean("s_EF", model.isFirstDose).apply()
+        sharedPreferences.edit().putBoolean("s_EE", model.iseighteen).apply()
+
+
         val intent = Intent(this, EndlessService::class.java)
-        intent.putExtra("PINCODE",model.demopin)
+        intent.putExtra("PINCODE", model.demopin)
+        intent.putExtra("IS_EIGHTEEN", model.iseighteen)
+        intent.putExtra("IS_FIRSTDOSE", model.isFirstDose)
+
 
         intent.also {
             it.action = action.name

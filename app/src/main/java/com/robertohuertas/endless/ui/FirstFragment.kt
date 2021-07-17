@@ -1,6 +1,7 @@
 package com.robertohuertas.endless.ui
 
 import android.app.Activity
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -28,6 +29,7 @@ class FirstFragment:Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = ActivityFirstBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
@@ -35,22 +37,25 @@ class FirstFragment:Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val activity = activity as MainActivity
-        var flag = true
+        var flag = activity.sharedPreferences.getBoolean("notify_button",true)
 
 
+       binding.pinTextField.setText(activity.sharedPreferences.getString("s_PIN","").toString())
 
         binding.notify.setOnClickListener {
                 model.demopin = binding.pinTextField.text.toString()
+                Log.i("IS_flag",flag.toString())
             if(flag)
             {
                 activity.myactionOnService(Actions.START)
                 flag=false
             }else
             {
-                activity.actionOnService(Actions.STOP)
+                activity.myactionOnService(Actions.STOP)
                 flag=true
             }
-
+            activity.sharedPreferences.edit().putBoolean("notify_button",flag).apply()
+            Log.i("IS_flag2",flag.toString())
         }
 
         binding.checkAvailability.setOnClickListener {
@@ -58,6 +63,8 @@ class FirstFragment:Fragment() {
            // activity.actionOnService()
            // actionOnService(Actions.STOP)
             findNavController().navigate(R.id.action_firstFragment_to_secondFragment)
+
+
         }
 
 

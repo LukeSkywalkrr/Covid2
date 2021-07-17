@@ -1,5 +1,6 @@
 package com.robertohuertas.endless.viewmodel
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -17,6 +18,7 @@ class MyViewmodel : ViewModel() {
     var iseighteen = true
     var isFirstDose = true
     val distric = MutableLiveData<List<District>>()
+
     private val covid = MutableLiveData<Covid>()
     private val covidListFromFirstFragment = MutableLiveData<List<Session>>()
     var listOfButtons = mutableListOf(0,0,0,0,0,0,0,0,0)

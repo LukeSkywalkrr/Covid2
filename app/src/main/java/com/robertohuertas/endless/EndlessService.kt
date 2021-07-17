@@ -28,6 +28,8 @@ class EndlessService : Service() {
     val CHANNEL_NAME = "channelname"
     val NOTIFICATION_ID =0
     var d : String = "221005"
+    var isET : Boolean = true
+    var isFT : Boolean = true
    // lateinit var  activity : MainActivity
 
     private var wakeLock: PowerManager.WakeLock? = null
@@ -54,7 +56,20 @@ class EndlessService : Service() {
                 "with a null intent. It has been probably restarted by the system."
             )
         }
-        intent?.getStringExtra("PINCODE").also { d = it.toString() }
+        if(intent!=null)
+        {
+            intent?.getStringExtra("PINCODE").also { d = it.toString() }
+            intent?.getBooleanExtra("IS_EIGHTEEN",true).also {
+                if (it != null) {
+                    isET = it
+                }
+            }
+            intent?.getBooleanExtra("IS_FIRSTDOSE",true).also {  if (it != null) {
+                isFT = it
+            } }
+        }
+
+        Log.i("IS_","onStartCalled")
         // by returning this we make sure the service is restarted if the system kills the service
         return START_STICKY
     }
@@ -110,7 +125,7 @@ class EndlessService : Service() {
                     x=x+1
                     log(x.toString())
                 }
-                delay(1 * 1200 * 1000)
+                delay(1 * 20 * 1000)
             }
             log("End of the loop for the service")
         }
@@ -135,14 +150,47 @@ class EndlessService : Service() {
     }
 
         fun new(dis :String , dte : String) {
+
+           val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
+           val newd = sharedPreferences?.getString("s_PIN","221005")
+            val neET = sharedPreferences?.getBoolean("s_EE",true)
+            val neEF = sharedPreferences?.getBoolean("s_EF",true)
+
             GlobalScope.launch {
                 val api = NewsRepo()
                 Log.i("D VALUE IS",d)
-              var x=api.getbyPin(d,dte).body()?.sessions
+              var x=api.getbyPin(newd!!,dte).body()?.sessions
+                Log.i("IS_NEWD",newd.toString())
+               Log.i("IS_NEWXVALE",x.toString())
+                Log.i("IS_E",neET.toString())
+                Log.i("IS_F",neEF.toString())
+                Log.i("IS_D",d)
 
-               Log.i("WORKING FUNCTION",x.toString())
+//                var flag = sharedPreferences.getBoolean("notify_button",false)
+//                Log.i("IS_flginSEeerc",flag.toString())
 
-
+                if(neET == true)
+                {
+                    x= x?.filter { it.min_age_limit ==18 }
+                }else
+                {
+                    x= x?.filter { it.min_age_limit ==45 }
+                }
+                if(neEF == true)
+                {
+                    x= x?.filter { it.available_capacity_dose1 > 0 }
+                }else
+                {
+                    x= x?.filter { it.available_capacity_dose2 > 0 }
+                }
+                if(x?.isEmpty() == true)
+                {
+                    Log.i("IS_FASE",x.toString())
+                }else
+                {
+                    Log.i("IS_TRUE",x.toString())
+                    notfin.notify(NOTIFICATION_ID,not)
+                }
 //                for (i in api.getbyPin(dis,dte).body()!!.sessions)
 //                {
 //
@@ -172,8 +220,8 @@ class EndlessService : Service() {
 
 
         not = NotificationCompat.Builder(this,CHANNEL_ID)
-            .setContentTitle("sssd")
-            .setContentText("sdddddd")
+            .setContentTitle("Vaccine Avilabel")
+            .setContentText("Click Now To Book")
             .setSmallIcon(R.drawable.ic_launcher_background)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(pendingIntent)
@@ -217,7 +265,7 @@ class EndlessService : Service() {
         ) else Notification.Builder(this)
 
         return builder
-            .setContentTitle("Endless Service")
+            .setContentTitle("App Working")
             .setContentText("This is your favorite endless service working")
             .setContentIntent(pendingIntent)
             .setSmallIcon(R.mipmap.ic_launcher)
@@ -226,31 +274,31 @@ class EndlessService : Service() {
             .build()
     }
 
-    data class Covid(
-        val sessions: List<Session>
-    )
-    data class Session(
-        val address: String,
-        val available_capacity: Int,
-        val available_capacity_dose1: Int,
-        val available_capacity_dose2: Int,
-        val block_name: String,
-        val center_id: Int,
-        val date: String,
-        val district_name: String,
-        val fee: String,
-        val fee_type: String,
-        val from: String,
-        val lat: Double,
-        val long: Double,
-        val min_age_limit: Int,
-        val name: String,
-        val pincode: Int,
-        val session_id: String,
-        val slots: List<String>,
-        val state_name: String,
-        val to: String,
-        val vaccine: String
-    )
+//    data class Covid(
+//        val sessions: List<Session>
+//    )
+//    data class Session(
+//        val address: String,
+//        val available_capacity: Int,
+//        val available_capacity_dose1: Int,
+//        val available_capacity_dose2: Int,
+//        val block_name: String,
+//        val center_id: Int,
+//        val date: String,
+//        val district_name: String,
+//        val fee: String,
+//        val fee_type: String,
+//        val from: String,
+//        val lat: Double,
+//        val long: Double,
+//        val min_age_limit: Int,
+//        val name: String,
+//        val pincode: Int,
+//        val session_id: String,
+//        val slots: List<String>,
+//        val state_name: String,
+//        val to: String,
+//        val vaccine: String
+//    )
 
 }
