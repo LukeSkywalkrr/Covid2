@@ -2,17 +2,18 @@ package com.robertohuertas.endless.adaptor
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.view.menu.ActionMenuItemView
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.robertohuertas.endless.R
 import com.robertohuertas.endless.databinding.VaccineInfoItemBinding
-import com.robertohuertas.endless.models.Covid
 import com.robertohuertas.endless.models.Session
 
-class RecyclerViewAdaptor(private val covid: List<Session>?, private val context : Context?) : RecyclerView.Adapter<RecyclerViewAdaptor.SheduleViewHolder>(){
+class RecyclerViewAdaptor(
+    private val covid: List<Session>?,
+    private val context: Context?,
+    val clickOfBookNow: () -> Unit
+    ) :
+    RecyclerView.Adapter<RecyclerViewAdaptor.SheduleViewHolder>(){
 
     inner class SheduleViewHolder(private val binding: VaccineInfoItemBinding) : RecyclerView.ViewHolder(binding.root)
     {
@@ -31,6 +32,8 @@ class RecyclerViewAdaptor(private val covid: List<Session>?, private val context
                 context?.getString(R.string.dose_2)?.let { String.format(it, session?.available_capacity_dose2) }
             binding.numberOfSlots.text =
                 context?.getString(R.string.slots)?.let { String.format(it, session?.available_capacity) }
+
+            binding.bookNow.setOnClickListener { clickOfBookNow.invoke() }
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SheduleViewHolder {    val view =

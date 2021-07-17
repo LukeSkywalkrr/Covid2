@@ -8,10 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.robertohuertas.endless.R
 import com.robertohuertas.endless.adaptor.RecyclerViewAdaptor
 import com.robertohuertas.endless.databinding.ActivitySecondBinding
 import com.robertohuertas.endless.viewmodel.MyViewmodel
-import kotlinx.android.synthetic.main.activity_second.*
 
 class SecondFragment: Fragment() {
     var  adapter:RecyclerViewAdaptor? = null
@@ -32,12 +33,11 @@ class SecondFragment: Fragment() {
         myViewModel.distric.observe(viewLifecycleOwner, Observer {
             Log.d("newDistrict", "onViewCreated: $it")
         })
-
         myViewModel.covidFinalListForRV.observe(viewLifecycleOwner, Observer {
             Log.d("XXX", "onViewCreated: $it")
-                adapter = RecyclerViewAdaptor(it, context)
+                adapter = RecyclerViewAdaptor(it, context
+                ) { findNavController().navigate(R.id.action_secondFragment_to_webViewFragment) }
             binding.recyclerView.adapter = adapter
-
         })
 
      //   binding.recyclerView.layoutManager = LinearLayoutManager(this
@@ -67,7 +67,5 @@ class SecondFragment: Fragment() {
             myViewModel.checkForFiltersToBeAddedToList()
             adapter?.notifyDataSetChanged()
         }
-
-
     }
 }
