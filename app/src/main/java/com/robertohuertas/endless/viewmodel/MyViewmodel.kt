@@ -19,15 +19,11 @@ class MyViewmodel : ViewModel() {
     val distric = MutableLiveData<List<District>>()
     val covid = MutableLiveData<Covid>()
     val covidListFromFirstFragment = MutableLiveData<List<Session>>()
-    val listOfButtons = mutableListOf(0,0,0,0,0,0,0,0,0)
+    var listOfButtons = mutableListOf(0,0,0,0,0,0,0,0,0)
     var covidFinalListForRV = MutableLiveData<List<Session>>()
 
     var covidListToBeModified = MutableLiveData<List<Session>>()
     var demopin = "141001"
-    init {
-        covidListToBeModified = covidListFromFirstFragment
-    }
-
 
     fun getDistrict() {
         viewModelScope.launch {
@@ -59,33 +55,38 @@ class MyViewmodel : ViewModel() {
               {
                   covidListFromFirstFragment.value = covidListFromFirstFragment.value?.filter { it.available_capacity_dose2 > 0   }
               }
-
-
+              covidFinalListForRV.value = covidListFromFirstFragment.value
+              listOfButtons = mutableListOf(0,0,0,0,0,0,0,0,0)
           }
       }
 
     fun buttonClicked(button:Int){
         button.let { listOfButtons[it] = 1 }
+        Log.d("second", "buttonClicked: $listOfButtons")
     }
 
     fun buttonUnselected(button:Int){
         button.let { listOfButtons[it] = 0 }
+        Log.d("second", "buttonClicked: $listOfButtons")
+
     }
 
     fun checkForFiltersToBeAddedToList(){
-        covidListToBeModified = covidListFromFirstFragment
+        covidListToBeModified.value = covidListFromFirstFragment.value
         val temporaryList = covidListToBeModified.value?.toMutableList()
-        covidListToBeModified.let { finalList->
-            for (i in 1..9){
-                when(i){
-                    1-> if(listOfButtons[i] == 1){temporaryList?.retainAll{it.fee_type == "Free"}}
-                    2-> if(listOfButtons[i] == 1){temporaryList?.retainAll{it.fee_type == "Paid"}}
-                    3-> if(listOfButtons[i] == 1){temporaryList?.retainAll{it.fee_type == "COVISHIELD"}}
-                    4-> if(listOfButtons[i] == 1){temporaryList?.retainAll{it.fee_type == "COVAXIN"}}
-                }
-            }
-        }
-        covidFinalListForRV.value = temporaryList
+        if(listOfButtons[1] == 1){temporaryList?.retainAll{it.fee_type == "Free"}}
+        Log.d("second", "checkForFiltersToBeAddedToList: $temporaryList")
+
+         if(listOfButtons[2] == 1){temporaryList?.retainAll{it.fee_type == "Paid"}}
+        Log.d("second", "checkForFiltersToBeAddedToList: $temporaryList")
+
+        if(listOfButtons[3] == 1){temporaryList?.retainAll{it.vaccine == "COVISHIELD"}}
+        Log.d("second", "checkForFiltersToBeAddedToList: $temporaryList")
+
+        if(listOfButtons[4] == 1){temporaryList?.retainAll{it.vaccine == "COVAXIN"}}
+        Log.d("second", "checkForFiltersToBeAddedToList: $temporaryList")
+
+        covidFinalListForRV.postValue(temporaryList)
     }
 
 

@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import com.robertohuertas.endless.adaptor.RecyclerViewAdaptor
 import com.robertohuertas.endless.databinding.ActivitySecondBinding
 import com.robertohuertas.endless.viewmodel.MyViewmodel
+import kotlinx.android.synthetic.main.activity_second.*
 
 class SecondFragment: Fragment() {
     var  adapter:RecyclerViewAdaptor? = null
@@ -25,9 +26,6 @@ class SecondFragment: Fragment() {
         return binding.root
     }
 
-
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -37,11 +35,8 @@ class SecondFragment: Fragment() {
 
         myViewModel.covidFinalListForRV.observe(viewLifecycleOwner, Observer {
             Log.d("XXX", "onViewCreated: $it")
-            if(!it.isNullOrEmpty())
-            {
                 adapter = RecyclerViewAdaptor(it)
-                binding.recyclerView.adapter = adapter
-            }
+            binding.recyclerView.adapter = adapter
 
         })
 
@@ -52,21 +47,25 @@ class SecondFragment: Fragment() {
             myViewModel.buttonClicked(1)
             myViewModel.buttonUnselected(2)
             myViewModel.checkForFiltersToBeAddedToList()
+            adapter?.notifyDataSetChanged()
         }
         binding.button2.setOnClickListener {
             myViewModel.buttonClicked(2)
             myViewModel.buttonUnselected(1)
             myViewModel.checkForFiltersToBeAddedToList()
+            adapter?.notifyDataSetChanged()
         }
         binding.button3.setOnClickListener {
             myViewModel.buttonClicked(3)
             myViewModel.buttonUnselected(4)
             myViewModel.checkForFiltersToBeAddedToList()
+            adapter?.notifyDataSetChanged()
         }
         binding.button4.setOnClickListener {
             myViewModel.buttonClicked(4)
             myViewModel.buttonUnselected(3)
             myViewModel.checkForFiltersToBeAddedToList()
+            adapter?.notifyDataSetChanged()
         }
 
 
