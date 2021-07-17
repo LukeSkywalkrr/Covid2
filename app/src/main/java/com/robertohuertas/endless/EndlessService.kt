@@ -1,5 +1,6 @@
 package com.robertohuertas.endless
 
+import android.annotation.SuppressLint
 import android.app.*
 import android.content.Context
 import android.content.Intent
@@ -15,6 +16,7 @@ import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavDeepLinkBuilder
 import com.robertohuertas.endless.repository.NewsRepo
 import com.robertohuertas.endless.viewmodel.MyViewmodel
 import kotlinx.coroutines.*
@@ -204,6 +206,7 @@ class EndlessService : Service() {
             }
         }
 
+
     private fun ourNotification()  {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
@@ -214,10 +217,15 @@ class EndlessService : Service() {
             manager.createNotificationChannel (channel)
         }
 
-        val pendingIntent: PendingIntent = Intent(this, MainActivity::class.java).let { notificationIntent ->
-            PendingIntent.getActivity(this, 0, notificationIntent, 0)
-        }
+//        val pendingIntent: PendingIntent = Intent(this, MainActivity::class.java).let { notificationIntent ->
+//            PendingIntent.getActivity(this, 0, notificationIntent, 0)
+//        }
 
+        val pendingIntent = NavDeepLinkBuilder(this)
+            .setComponentName(MainActivity::class.java)
+            .setGraph(R.navigation.nav_graph)
+            .setDestination(R.id.webViewFragment)
+            .createPendingIntent()
 
         not = NotificationCompat.Builder(this,CHANNEL_ID)
             .setContentTitle("Vaccine Avilabel")
