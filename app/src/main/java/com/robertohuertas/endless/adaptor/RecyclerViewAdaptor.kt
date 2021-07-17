@@ -27,6 +27,7 @@ class RecyclerViewAdaptor(val covid: List<Session>) : RecyclerView.Adapter<Recyc
                 binding.date.text=session?.date
                 binding.numberOfSlots.text = session?.available_capacity.toString()
                 binding.firstSlot.text=session?.available_capacity_dose1.toString()
+                binding.vaccineName.text=session?.vaccine.toString()
 
         }
     }

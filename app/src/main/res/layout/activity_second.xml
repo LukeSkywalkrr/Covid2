@@ -34,7 +34,7 @@
             android:layout_marginTop="27dp" />
 
     <Button
-            android:text="Vaccine1"
+            android:text="Covishield"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button3"
@@ -49,7 +49,7 @@
             app:layout_constraintTop_toBottomOf="@id/button1" />
 
     <Button
-            android:text="Vaccine2"
+            android:text="Covaxin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button4"

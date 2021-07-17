@@ -36,8 +36,11 @@ class FirstFragment:Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val activity = activity as MainActivity
         var flag = true
-        binding.notify.setOnClickListener {
 
+
+
+        binding.notify.setOnClickListener {
+                model.demopin = binding.pinTextField.text.toString()
             if(flag)
             {
                 activity.myactionOnService(Actions.START)
@@ -68,6 +71,7 @@ class FirstFragment:Fragment() {
         binding.radioFortify.setOnClickListener {
             binding.radioEighteen.isChecked = false
             model.iseighteen =false
+
         }
 
         binding.radioSecond.setOnClickListener {
