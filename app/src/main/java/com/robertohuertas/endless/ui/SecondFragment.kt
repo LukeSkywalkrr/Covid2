@@ -1,5 +1,6 @@
 package com.robertohuertas.endless.ui
 
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -21,7 +22,7 @@ import java.time.format.DateTimeFormatter
 
 
 class SecondFragment: Fragment() {
-    var  adapter:RecyclerViewAdaptor? = null
+    var adapter: RecyclerViewAdaptor? = null
     private val myViewModel: MyViewmodel by activityViewModels()
     lateinit var binding: ActivitySecondBinding
     override fun onCreateView(
@@ -46,11 +47,12 @@ class SecondFragment: Fragment() {
                 it, context
             ) { findNavController().navigate(R.id.action_secondFragment_to_webViewFragment) }
             binding.recyclerView.adapter = adapter
+             updateUI()
 
         })
 
 
-     //   binding.recyclerView.layoutManager = LinearLayoutManager(this
+        //   binding.recyclerView.layoutManager = LinearLayoutManager(this
 
 
         binding.button1.setOnClickListener {
@@ -89,27 +91,61 @@ class SecondFragment: Fragment() {
         binding.button6.setOnClickListener {
             myViewModel.getCov(myViewModel.demopin, myViewModel.currentDate)
             Log.i("IS_", myViewModel.currentDate)
+            myViewModel.buttonClicked(5)
+            myViewModel.buttonUnselected(6)
+            myViewModel.buttonUnselected(7)
+            myViewModel.buttonUnselected(8)
+
         }
         binding.button7.setOnClickListener {
             myViewModel.getCov(myViewModel.demopin, day1)
             Log.i("IS_", myViewModel.listOfButtons.toString())
-          //  myViewModel.checkForFiltersToBeAddedToList()
-           // adapter?.notifyDataSetChanged()
+            //  myViewModel.checkForFiltersToBeAddedToList()
+            // adapter?.notifyDataSetChanged()
+            myViewModel.buttonClicked(6)
+            myViewModel.buttonUnselected(5)
+            myViewModel.buttonUnselected(7)
+            myViewModel.buttonUnselected(8)
         }
         binding.button8.setOnClickListener {
             myViewModel.getCov(myViewModel.demopin, day2)
             Log.i("IS_", day2)
+            myViewModel.buttonClicked(7)
+            myViewModel.buttonUnselected(6)
+            myViewModel.buttonUnselected(5)
+            myViewModel.buttonUnselected(8)
         }
         binding.button9.setOnClickListener {
             myViewModel.getCov(myViewModel.demopin, day3)
             Log.i("IS_", day3)
+           // binding.button9.background = requireContext().getDrawable(R.drawable.button_selected)
+            myViewModel.buttonClicked(8)
+            myViewModel.buttonUnselected(6)
+            myViewModel.buttonUnselected(7)
+            myViewModel.buttonUnselected(5)
         }
     }
 
-    
+
+    fun updateUI() {
+        val list = myViewModel.listOfButtons
+        for (i in 1..9) {
+            when (i) {
+                1 -> if(list[i]==0)  binding.button1.background = requireContext().getDrawable(R.drawable.rounder_buttons) else binding.button1.background = requireContext().getDrawable(R.drawable.button_selected)
+                2 ->  if(list[i]==0)  binding.button2.background = requireContext().getDrawable(R.drawable.rounder_buttons) else binding.button2.background = requireContext().getDrawable(R.drawable.button_selected)
+                3 ->  if(list[i]==0)  binding.button3.background = requireContext().getDrawable(R.drawable.rounder_buttons) else binding.button3.background = requireContext().getDrawable(R.drawable.button_selected)
+                4 ->  if(list[i]==0)  binding.button4.background = requireContext().getDrawable(R.drawable.rounder_buttons) else binding.button4.background = requireContext().getDrawable(R.drawable.button_selected)
+                5 ->  if(list[i]==0)  binding.button6.background = requireContext().getDrawable(R.drawable.rounder_buttons) else binding.button6.background = requireContext().getDrawable(R.drawable.button_selected)
+                6 ->  if(list[i]==0)  binding.button7.background = requireContext().getDrawable(R.drawable.rounder_buttons) else binding.button7.background = requireContext().getDrawable(R.drawable.button_selected)
+                7 ->  if(list[i]==0)  binding.button8.background = requireContext().getDrawable(R.drawable.rounder_buttons) else binding.button8.background = requireContext().getDrawable(R.drawable.button_selected)
+                8 ->  if(list[i]==0)  binding.button9.background = requireContext().getDrawable(R.drawable.rounder_buttons) else binding.button9.background = requireContext().getDrawable(R.drawable.button_selected)
+            }
 
 
+        }
 
 
-
+    }
 }
+
+

@@ -97,6 +97,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/button7"
             android:textSize="10sp"
+
             android:background="@drawable/rounder_buttons"
             app:layout_constraintStart_toEndOf="@+id/button6"
             app:layout_constraintHorizontal_bias="0.5"
