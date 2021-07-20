@@ -20,6 +20,8 @@ import androidx.navigation.NavDeepLinkBuilder
 import com.robertohuertas.endless.repository.NewsRepo
 import com.robertohuertas.endless.viewmodel.MyViewmodel
 import kotlinx.coroutines.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class EndlessService : Service() {
@@ -32,7 +34,10 @@ class EndlessService : Service() {
     var d : String = "221005"
     var isET : Boolean = true
     var isFT : Boolean = true
-   // lateinit var  activity : MainActivity
+    lateinit var sdf : SimpleDateFormat
+    lateinit var currentDate : String
+
+    // lateinit var  activity : MainActivity
 
     private var wakeLock: PowerManager.WakeLock? = null
     private var isServiceStarted = false
@@ -121,7 +126,11 @@ class EndlessService : Service() {
         GlobalScope.launch(Dispatchers.IO) {
             while (isServiceStarted) {
                 launch(Dispatchers.IO) {
-                    new("512","17-07-2021")
+
+                   sdf = SimpleDateFormat("dd-M-yyyy")
+                    currentDate = sdf.format(Date())
+
+                    new("512",currentDate)
                   //  Log.d("SUN FINCTION${x}",com.robertohuertas.endless.atask.taska().d.toString())
 
                     x=x+1

@@ -18,6 +18,8 @@ import androidx.navigation.fragment.findNavController
 import com.robertohuertas.endless.*
 import com.robertohuertas.endless.databinding.ActivityFirstBinding
 import com.robertohuertas.endless.viewmodel.MyViewmodel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class FirstFragment:Fragment() {
 
@@ -42,6 +44,8 @@ class FirstFragment:Fragment() {
 
        binding.pinTextField.setText(activity.sharedPreferences.getString("s_PIN","").toString())
 
+
+        //Notify Me Function
         binding.notify.setOnClickListener {
                 model.demopin = binding.pinTextField.text.toString()
                 Log.i("IS_flag",flag.toString())
@@ -58,13 +62,19 @@ class FirstFragment:Fragment() {
             Log.i("IS_flag2",flag.toString())
         }
 
+//        val date = Calendar.getInstance().time
+//        val formatter = SimpleDateFormat.getDateTimeInstance() //or use getDateInstance()
+//        val formatedDate = formatter.format(date)
+
+
+
         binding.checkAvailability.setOnClickListener {
-            model.getCov(binding.pinTextField.text.toString())
+            model.getCov(binding.pinTextField.text.toString(),model.currentDate)
            // activity.actionOnService()
            // actionOnService(Actions.STOP)
             findNavController().navigate(R.id.action_firstFragment_to_secondFragment)
 
-
+           // Log.i("IS_",currentDate)
         }
 
 

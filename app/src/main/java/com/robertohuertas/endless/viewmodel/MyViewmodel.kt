@@ -12,13 +12,16 @@ import com.robertohuertas.endless.models.District
 import com.robertohuertas.endless.models.Session
 import com.robertohuertas.endless.repository.NewsRepo
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MyViewmodel : ViewModel() {
     val repository = NewsRepo()
     var iseighteen = true
     var isFirstDose = true
     val distric = MutableLiveData<List<District>>()
-
+    val sdf = SimpleDateFormat("dd-M-yyyy")
+    val currentDate = sdf.format(Date())
     private val covid = MutableLiveData<Covid>()
     private val covidListFromFirstFragment = MutableLiveData<List<Session>>()
     var listOfButtons = mutableListOf(0,0,0,0,0,0,0,0,0)
@@ -36,9 +39,9 @@ class MyViewmodel : ViewModel() {
         covidListFromFirstFragment.value = covid.value?.sessions?.filterNot { it.available_capacity == 1 }
     }
 
-      fun getCov(pin : String) {
+      fun getCov(pin : String,date: String) {
           viewModelScope.launch {
-              covid.value=repository.getbyPin(pin,"17-07-2021").body()
+              covid.value=repository.getbyPin(pin,date).body()
               covidListFromFirstFragment.value = covid.value?.sessions
               Log.i("GetCOV",covid.value.toString())
              // covidListFromFirstFragment.value = covidListFromFirstFragment.value?.filter { it.available_capacity == 1 }
