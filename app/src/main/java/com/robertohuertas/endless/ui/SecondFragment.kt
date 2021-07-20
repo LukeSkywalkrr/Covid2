@@ -46,7 +46,9 @@ class SecondFragment: Fragment() {
                 it, context
             ) { findNavController().navigate(R.id.action_secondFragment_to_webViewFragment) }
             binding.recyclerView.adapter = adapter
+
         })
+
 
      //   binding.recyclerView.layoutManager = LinearLayoutManager(this
 
@@ -90,7 +92,9 @@ class SecondFragment: Fragment() {
         }
         binding.button7.setOnClickListener {
             myViewModel.getCov(myViewModel.demopin, day1)
-            Log.i("IS_", day1)
+            Log.i("IS_", myViewModel.listOfButtons.toString())
+          //  myViewModel.checkForFiltersToBeAddedToList()
+           // adapter?.notifyDataSetChanged()
         }
         binding.button8.setOnClickListener {
             myViewModel.getCov(myViewModel.demopin, day2)
@@ -101,4 +105,11 @@ class SecondFragment: Fragment() {
             Log.i("IS_", day3)
         }
     }
+
+    
+
+
+
+
+
 }

@@ -61,7 +61,8 @@ class MyViewmodel : ViewModel() {
                   covidListFromFirstFragment.value = covidListFromFirstFragment.value?.filter { it.available_capacity_dose2 > 0   }
               }
               covidFinalListForRV.value = covidListFromFirstFragment.value
-              listOfButtons = mutableListOf(0,0,0,0,0,0,0,0,0)
+           //   listOfButtons = mutableListOf(0,0,0,0,0,0,0,0,0)
+              checkForFiltersToBeAddedToList()
           }
       }
 

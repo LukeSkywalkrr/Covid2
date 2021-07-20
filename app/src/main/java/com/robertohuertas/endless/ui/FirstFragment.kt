@@ -69,6 +69,7 @@ class FirstFragment:Fragment() {
 
 
         binding.checkAvailability.setOnClickListener {
+            model.listOfButtons = mutableListOf(0,0,0,0,0,0,0,0,0)
             model.getCov(binding.pinTextField.text.toString(),model.currentDate)
            // activity.actionOnService()
            // actionOnService(Actions.STOP)
