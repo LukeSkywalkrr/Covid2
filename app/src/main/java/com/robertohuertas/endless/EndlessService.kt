@@ -211,7 +211,7 @@ class EndlessService : Service() {
 //
 //                }
                 Log.i("states", "new: ${api.getStates().body()!!.states}")
-                Log.i("district", "new: ${api.getDistricts().body()!!.districts}")
+                Log.i("district", "new: ${api.getDistricts(29).body()!!.districts}")
             }
         }
 

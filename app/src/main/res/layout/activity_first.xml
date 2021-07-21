@@ -18,6 +18,7 @@
             app:layout_constraintVertical_bias="0.133">
 
         <Button
+                android:id="@+id/btn_pincode"
                 android:padding="12dp"
                 android:layout_weight="0.5"
                 android:layout_width="wrap_content"
@@ -25,6 +26,7 @@
                 android:text="PIN Code" />
 
         <Button
+                android:id="@+id/btn_district"
                 android:layout_weight="0.5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -34,7 +36,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/pincode_layout"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout_editor_absoluteY="0dp"
@@ -65,7 +67,7 @@
                     android:id="@+id/pin_textField"
                     android:hint="Find vaccines by pincode"
                     android:inputType="number"
-                    android:maxLength="6"/>
+                    android:maxLength="6" />
 
 
         </LinearLayout>
@@ -211,7 +213,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/district_layout"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -229,18 +231,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
 
-            <ScrollView
+            <Spinner
+                    android:id="@+id/dropdown_states"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp" />
+                    android:spinnerMode="dropdown"
+                    android:layout_height="wrap_content" />
+
             <TextView
                     android:text="Select States"
                     android:textSize="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
 
-            <ScrollView
+            <Spinner
+                    android:id="@+id/dropdown_district"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp" />
+                    android:spinnerMode="dropdown"
+                    android:layout_height="wrap_content" />
 
         </LinearLayout>
 

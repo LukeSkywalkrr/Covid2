@@ -22,6 +22,7 @@ import java.time.format.DateTimeFormatter
 
 
 class SecondFragment: Fragment() {
+
     var adapter: RecyclerViewAdaptor? = null
     private val myViewModel: MyViewmodel by activityViewModels()
     lateinit var binding: ActivitySecondBinding
@@ -34,7 +35,6 @@ class SecondFragment: Fragment() {
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -89,7 +89,7 @@ class SecondFragment: Fragment() {
 
         // Click listeners for date changing buttons
         binding.button6.setOnClickListener {
-            myViewModel.getCov(myViewModel.demopin, myViewModel.currentDate)
+            myViewModel.getCov(myViewModel.demopin, myViewModel.currentDate, myViewModel.districtId)
             Log.i("IS_", myViewModel.currentDate)
             myViewModel.buttonClicked(5)
             myViewModel.buttonUnselected(6)
@@ -98,7 +98,7 @@ class SecondFragment: Fragment() {
 
         }
         binding.button7.setOnClickListener {
-            myViewModel.getCov(myViewModel.demopin, day1)
+            myViewModel.getCov(myViewModel.demopin, day1, myViewModel.districtId)
             Log.i("IS_", myViewModel.listOfButtons.toString())
             //  myViewModel.checkForFiltersToBeAddedToList()
             // adapter?.notifyDataSetChanged()
@@ -108,7 +108,7 @@ class SecondFragment: Fragment() {
             myViewModel.buttonUnselected(8)
         }
         binding.button8.setOnClickListener {
-            myViewModel.getCov(myViewModel.demopin, day2)
+            myViewModel.getCov(myViewModel.demopin, day2, myViewModel.districtId)
             Log.i("IS_", day2)
             myViewModel.buttonClicked(7)
             myViewModel.buttonUnselected(6)
@@ -116,7 +116,7 @@ class SecondFragment: Fragment() {
             myViewModel.buttonUnselected(8)
         }
         binding.button9.setOnClickListener {
-            myViewModel.getCov(myViewModel.demopin, day3)
+            myViewModel.getCov(myViewModel.demopin, day3, myViewModel.districtId)
             Log.i("IS_", day3)
            // binding.button9.background = requireContext().getDrawable(R.drawable.button_selected)
             myViewModel.buttonClicked(8)
