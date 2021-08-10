@@ -1,3 +1,3 @@
-# Endless Service
-
-This is just a project showing how to run an Android Foreground Service that will never stop running.
+# Covid Vaccine Alert App
+Covid Vaccine Alert App is an Android app that lets your check the available vaccine slots based on your Pincode or District.</br>
+It also has additional filters from Age group, Dose Number,Date ,Free/Paid,Covishied/Covaxin  
