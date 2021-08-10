@@ -6,5 +6,5 @@ It also has additional filters from Age group, Dose Number,Date ,Free/Paid,Covis
 User can also enable Notification Alert Service that will notify user once the Slots are Available </br>
 <img src="https://github.com/LukeSkywalkrr/Covid2/blob/master/ScreenShot/2.jpeg"   width="350" height="650">
 <img src="https://github.com/LukeSkywalkrr/Covid2/blob/master/ScreenShot/3.jpeg"   width="350" height="650"></br>
-<img src="https://imgur.com/a/PFbSpwb" width="400" height="850" />
-![rthrtht](https://imgur.com/a/PFbSpwb)
+<img src="https://github.com/LukeSkywalkrr/Covid2/blob/master/ScreenShot/Screenshot_20210811-024859_Covid%20Vaccine%20Alert.jpg" width="400" height="850" />
+
