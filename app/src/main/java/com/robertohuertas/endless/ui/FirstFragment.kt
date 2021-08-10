@@ -46,7 +46,7 @@ class FirstFragment:Fragment() {
         var flag = activity.sharedPreferences.getBoolean("notify_button",true)
 
 
-       binding.pinTextField.setText(activity.sharedPreferences.getString("s_PIN","").toString())
+     //  binding.pinTextField.setText(activity.sharedPreferences.getString("s_PIN","").toString())
 
 
         //Notify Me Function
@@ -71,6 +71,7 @@ class FirstFragment:Fragment() {
             model.getCov(binding.pinTextField.text.toString(),model.currentDate, districtId = model.districtId)
            // activity.actionOnService()
            // actionOnService(Actions.STOP)
+            model.demopin = binding.pinTextField.text.toString()
             findNavController().navigate(R.id.action_firstFragment_to_secondFragment)
 
            // Log.i("IS_",currentDate)
@@ -185,7 +186,8 @@ class FirstFragment:Fragment() {
         }
 
         binding.btnDistrict.setOnClickListener {
-            model.demopin = ""
+            binding.pinTextField.setText("")
+            model.demopin=" "
             binding.districtLayout.isVisible = true
             binding.pincodeLayout.isGone = true
         }

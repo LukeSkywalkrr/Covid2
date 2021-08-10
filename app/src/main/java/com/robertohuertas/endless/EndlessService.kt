@@ -63,18 +63,7 @@ class EndlessService : Service() {
                 "with a null intent. It has been probably restarted by the system."
             )
         }
-        if(intent!=null)
-        {
-            intent?.getStringExtra("PINCODE").also { d = it.toString() }
-            intent?.getBooleanExtra("IS_EIGHTEEN",true).also {
-                if (it != null) {
-                    isET = it
-                }
-            }
-            intent?.getBooleanExtra("IS_FIRSTDOSE",true).also {  if (it != null) {
-                isFT = it
-            } }
-        }
+
 
         Log.i("IS_","onStartCalled")
         // by returning this we make sure the service is restarted if the system kills the service
@@ -175,7 +164,7 @@ class EndlessService : Service() {
                Log.i("IS_NEWXVALE",x.toString())
                 Log.i("IS_E",neET.toString())
                 Log.i("IS_F",neEF.toString())
-                Log.i("IS_D",d)
+              //  Log.i("IS_D",d)
 
 //                var flag = sharedPreferences.getBoolean("notify_button",false)
 //                Log.i("IS_flginSEeerc",flag.toString())
@@ -210,7 +199,7 @@ class EndlessService : Service() {
 //                        notfin.notify(NOTIFICATION_ID,not)
 //
 //                }
-                Log.i("states", "new: ${api.getStates().body()!!.states}")
+                Log.i("IS_STATE", "new: ${api.getStates().body()!!.states}")
                 Log.i("district", "new: ${api.getDistricts(29).body()!!.districts}")
             }
         }
@@ -237,7 +226,7 @@ class EndlessService : Service() {
             .createPendingIntent()
 
         not = NotificationCompat.Builder(this,CHANNEL_ID)
-            .setContentTitle("Vaccine Avilabel")
+            .setContentTitle("Vaccine Available")
             .setContentText("Click Now To Book")
             .setSmallIcon(R.drawable.ic_launcher_background)
             .setPriority(NotificationCompat.PRIORITY_HIGH)

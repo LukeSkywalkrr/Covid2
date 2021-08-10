@@ -27,7 +27,7 @@ class MyViewmodel : ViewModel() {
     var covidFinalListForRV = MutableLiveData<List<Session>>()
 
     var covidListToBeModified = MutableLiveData<List<Session>>()
-    var demopin = "141001"
+    var demopin = "221001"
     var districtId:Int = 0
 
     suspend fun getDistrict(stateId:Int): List<District> {
@@ -36,7 +36,7 @@ class MyViewmodel : ViewModel() {
 
     var district:List<District>? = null
     suspend fun getDistrictArray(stateId: Int):ArrayList<String>{
-            Log.d("sanchit", "getStatesArray: inside ")
+            Log.d("IX_", "getStatesArray: inside ")
             val names = ArrayList<String>()
 //        Log.d("sanchit", "getStatesArray: ${repository.getStates().body()?.states}")
             district = try {
@@ -58,7 +58,7 @@ class MyViewmodel : ViewModel() {
 
       fun getCov(pin : String,date: String, districtId:Int) {
           viewModelScope.launch {
-              Log.d("sanchit", "getCov: district id = $districtId, pin = $pin")
+              Log.d("IQ_", "getCov: district id = $districtId, pin = $pin,demopi =$demopin")
               if(pin.isNotBlank())
               covid=repository.getbyPin(pin,date).body()
               Log.d("sanchit", "getCov: by pincode ${repository.getbyPin(pin,date).body()}")
@@ -138,9 +138,5 @@ class MyViewmodel : ViewModel() {
         }
         return names
     }
-
-
-
-
 
 }
