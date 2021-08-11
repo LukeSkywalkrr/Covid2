@@ -7,4 +7,5 @@ User can also enable Notification Alert Service that will notify user once the S
 <img src="https://github.com/LukeSkywalkrr/Covid2/blob/master/ScreenShot/2.jpeg"    width="170" height="300">
 <img src="https://github.com/LukeSkywalkrr/Covid2/blob/master/ScreenShot/3.jpeg"    width="170" height="300"></br>
 <img src="https://github.com/LukeSkywalkrr/Covid2/blob/master/ScreenShot/Screenshot_20210811-024859_Covid%20Vaccine%20Alert.jpg"  width="170" height="350" />
+<img src="https://github.com/LukeSkywalkrr/Covid2/blob/master/ScreenShot/7.jpeg"  width="170" height="350" />
 
